@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 1;
+
+  .main {
+    flex: 1 0 auto;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: 70vh;
+    height: 70vh;
+    border: solid black 2px;
+
+    .header {
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+  }
+}
