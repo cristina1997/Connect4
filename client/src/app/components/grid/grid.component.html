@@ -1,0 +1,21 @@
+
+<div class="container">
+  <div class="grid-list">
+    <div class="player" *ngFor="let gridColumn of gridTileItems, let column = index">
+      <div *ngIf="column === 2">
+        <div class="token-design" [style.background-color]="nextColour"></div>
+      </div>
+      <div *ngFor="let gridRow of gridColumn">
+        <div class="token-change" [@movetoken]="{value: token[gridRow][column].gameState, params: {yPosition: token[gridRow][column].column,
+              bounceUp: bounceUp, bounceDown: bounceDown, 'bg-color': token[gridRow][column].colour }}">
+        </div>
+        <div class="grid-column" [style]="{'z-index': gridRow}"
+              (click)="tokenMovement(gridRow, column)"
+              [@hideContainer]="{value: token[gridRow][column].hiddenToken}">
+        </div>
+      </div>
+    </div>
+    <div class="grid-tile full-height full-width" *ngFor="let gridTile of gridTiles">
+    </div>
+  </div>
+</div>

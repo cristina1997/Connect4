@@ -1,0 +1,10 @@
+
+<div mat-dialog-container>
+  <div mat-dialog-title>Winner</div>
+  <div mat-dialog-content>The winner is:
+    <div *ngIf="data.colour === 'red'">Player 1</div>
+    <div *ngIf="data.colour === 'yellow'">Player 2</div>
+  </div>
+  <button mat-raised-button mat-dialog-close colour="basic" type="button">Try Again</button>
+</div>
+

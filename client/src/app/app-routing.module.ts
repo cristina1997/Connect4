@@ -10,12 +10,12 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () =>
-      import('./nav-bar/menu/menu.module').then((module) => module.MenuModule),
+      import('./components/menu/menu.module').then((module) => module.MenuModule),
   },
   {
     path: 'game',
     loadChildren: () =>
-      import('./nav-bar/game/game.module').then((module) => module.GameModule),
+      import('./components/game/game.module').then((module) => module.GameModule),
   },
 ];
 @NgModule({

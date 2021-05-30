@@ -1,6 +1,7 @@
 export interface GameTile {
-  cols: number;
-  rows: number;
+  column: number;
+  colspan: number;
+  rowspan: number;
   shape: string;
   height: string;
   width: string;

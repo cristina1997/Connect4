@@ -1,0 +1,54 @@
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 90px;
+
+  .player {
+    position: relative;
+
+    .token-design {
+      top: 1vh;
+      border-radius: 50%;
+      width: 10vh;
+      height: 10vh;
+      margin-left: 2vh;
+    }
+
+    .token-change {
+      visibility: hidden;
+      top: -10.77rem;
+      border-radius: 50%;
+      width: 10vh;
+      height: 10vh;
+      position: absolute;
+      left: 1rem;
+    }
+
+    .grid-column {
+      top: 0;
+      position: absolute;
+      width: 100%;
+      height: 630px;
+      cursor: pointer;
+    }
+  }
+
+  .grid-tile {
+    position:relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  .grid-tile:after{
+    content:'';
+    position:absolute;
+    border-radius: 50%;
+    width: 10vh;
+    height: 10vh;
+    top: .5rem;
+    left: 1rem;
+    box-shadow: 0 0 0 2000px darkturquoise;
+  }
+}
