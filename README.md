@@ -1,5 +1,8 @@
 # GenesysExercise
 
+![image](https://user-images.githubusercontent.com/22792015/120247632-19339700-c26c-11eb-9415-9a8b459f62e5.png)
+
+
 ## JAVA
 
 You will need a text editor (Eclipse), [JDK 8 or later](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) (make sure the Java [PATH and JAVA_HOME](https://mkyong.com/java/how-to-set-java_home-on-windows-10/) are set up in the environment variables.
