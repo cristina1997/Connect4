@@ -3,11 +3,8 @@
 ## JAVA
 
 You will need a text editor (Eclipse), [JDK 8 or later](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) (make sure the Java [PATH and JAVA_HOME](https://mkyong.com/java/how-to-set-java_home-on-windows-10/) are set up in the environment variables.
-Open the project with Eclipse
-
-> File > Open Project from File System and Navigate to where you downloaded the project.
-> To make sure that the project is open in Maven, right click on the project in Eclipse and go to
-> Configure > Convert to Maven project
+Open the project with Eclipse, `> File > Open Project from File System` and Navigate to where you downloaded the project.
+To make sure that the project is open in Maven, right click on the project in Eclipse and go to `> Configure > Convert to Maven project`
 
 ## Angular
 
