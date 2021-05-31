@@ -59,6 +59,7 @@ export class GridComponent implements OnInit {
 
   // Token colour
   nextColour: string = '';
+  startColour: string = ''
 
   constructor(private dialog: MatDialog) { }
 
@@ -94,13 +95,12 @@ export class GridComponent implements OnInit {
         token.gameState = GameState.END;
         this.count++;
         this.delay(500);
-      }
 
-      const isWon = this.calculateConnectFive(row, column, 0, token.colour, 'all');
-      if (isWon) {
-        setTimeout(() => { this.openDialog(token.colour)}, 500);
+        const isWon = this.calculateConnectFive(row, column, 0, token.colour, 'all');
+        if (isWon === true) {
+          setTimeout(() => { this.openDialog(token.colour)}, 500);
+        }
       }
-
     }
   }
 
