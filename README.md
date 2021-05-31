@@ -6,6 +6,7 @@ You will need a text editor (Eclipse), [JDK 8 or later](https://www.oracle.com/j
 Open the project with Eclipse, `> File > Open Project from File System` and Navigate to where you downloaded the project.
 To make sure that the project is open in Maven, right click on the project in Eclipse and go to `> Configure > Convert to Maven project`
 
+
 ## Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
