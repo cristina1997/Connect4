@@ -5,7 +5,7 @@ import { GameState } from 'src/app/enums/game-state';
 import { TokenColours } from 'src/app/enums/token-colours';
 import { Token } from 'src/app/models/token.model';
 import { HiddenToken } from 'src/app/enums/hidden-token';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { WinnerDialogComponent } from 'src/app/components/winner-dialog/winner-dialog.component';
 import { WinningLine } from 'src/app/enums/winning-line';
 
@@ -57,15 +57,20 @@ export class GridComponent implements OnInit {
   gridTiles: string[] = [];
   gridTileItems: number[][] = [];
 
-  // token colour
+  // Token colour
   nextColour: string = '';
 
   constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.createGrid();
+    this.displayToken();
+    this.displayGrid();
   }
 
+/*
+  * Moves the token
+  *
+  */
   tokenMovement(row: number, column: number): void {
     const token = this.token[row][column];
 
@@ -88,14 +93,21 @@ export class GridComponent implements OnInit {
         this.bounceDown = token.column - 10;
         token.gameState = GameState.END;
         this.count++;
+        this.delay(500);
       }
-      if (this.checkFourConnect(row, column, 0, token.colour)) {
-        this.openDialog(token.colour);
+
+      const isWon = this.calculateConnectFive(row, column, 0, token.colour, 'all');
+      if (isWon) {
+        setTimeout(() => { this.openDialog(token.colour)}, 500);
       }
-      this.delay(100);
+
     }
   }
 
+/*
+  * Opens the win dialog and creates a new grid when closed
+  *
+  */
   openDialog(colour: string) {
     const dialogRef = this.dialog.open(WinnerDialogComponent, {
       data: {
@@ -104,12 +116,17 @@ export class GridComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.createGrid();
+      this.displayToken();
+      this.displayGrid();
     });
   }
 
-  checkFourConnect(row: number, column: number, count: number, color: string, caseConnect = 'all'): boolean {
-    if (count === 4) {
+  /*
+    * Checks if the player gathered 5 tokens in a line
+    *
+    */
+  calculateConnectFive(row: number, column: number, count: number, color: string, caseConnect: string): boolean {
+    if (count === 5) {
       return true;
     } else if (this.token[row] === undefined || this.token[row][column] === undefined || this.token[row][column].colour === undefined) {
       return false;
@@ -118,46 +135,61 @@ export class GridComponent implements OnInit {
     } else {
       switch (caseConnect) {
         case WinningLine.EAST:
-          return this.checkFourConnect(row + 1, column, count + 1, color, WinningLine.EAST);
+          return this.calculateConnectFive(row + 1, column, count + 1, color, WinningLine.EAST);
         case WinningLine.WEST:
-          return this.checkFourConnect(row - 1, column, count + 1, color, WinningLine.WEST);
+          return this.calculateConnectFive(row - 1, column, count + 1, color, WinningLine.WEST);
         case WinningLine.NORTH:
-          return this.checkFourConnect(row, column + 1, count + 1, color, WinningLine.NORTH);
+          return this.calculateConnectFive(row, column + 1, count + 1, color, WinningLine.NORTH);
         case WinningLine.SOUTH:
-          return this.checkFourConnect(row, column - 1, count + 1, color, WinningLine.SOUTH);
-        case WinningLine.NORTH + WinningLine.EAST:
-          return this.checkFourConnect(row + 1, column + 1, count + 1, color, WinningLine.NORTH + WinningLine.EAST);
-        case WinningLine.NORTH + WinningLine.WEST:
-          return this.checkFourConnect(row - 1, column + 1, count + 1, color, WinningLine.NORTH + WinningLine.WEST);
-        case WinningLine.SOUTH+ WinningLine.EAST:
-          return this.checkFourConnect(row + 1, column - 1, count + 1, color, WinningLine.SOUTH+ WinningLine.EAST);
-        case WinningLine.SOUTH+ WinningLine.WEST:
-          return this.checkFourConnect(row - 1, column - 1, count + 1, color, WinningLine.SOUTH+ WinningLine.WEST);
+          return this.calculateConnectFive(row, column - 1, count + 1, color, WinningLine.SOUTH);
+        case WinningLine.NORTHEAST:
+          return this.calculateConnectFive(row + 1, column + 1, count + 1, color, WinningLine.NORTHEAST);
+        case WinningLine.NORTHWEST:
+          return this.calculateConnectFive(row - 1, column + 1, count + 1, color, WinningLine.NORTHWEST);
+        case WinningLine.SOUTHEAST:
+          return this.calculateConnectFive(row + 1, column - 1, count + 1, color, WinningLine.SOUTHEAST);
+        case WinningLine.SOUTHWEST:
+          return this.calculateConnectFive(row - 1, column - 1, count + 1, color, WinningLine.SOUTHWEST);
         case 'all':
-          return this.checkFourConnect(row + 1, column, count + 1, color, WinningLine.EAST) ||
-            this.checkFourConnect(row - 1, column, count + 1, color, WinningLine.WEST) ||
-            this.checkFourConnect(row, column + 1, count + 1, color, WinningLine.NORTH) ||
-            this.checkFourConnect(row, column - 1, count + 1, color, WinningLine.SOUTH) ||
-            this.checkFourConnect(row + 1, column + 1, count + 1, color, WinningLine.NORTH + WinningLine.EAST) ||
-            this.checkFourConnect(row - 1, column + 1, count + 1, color, WinningLine.NORTH + WinningLine.WEST) ||
-            this.checkFourConnect(row + 1, column - 1, count + 1, color, WinningLine.SOUTH+ WinningLine.EAST) ||
-            this.checkFourConnect(row - 1, column - 1, count + 1, color, WinningLine.SOUTH+ WinningLine.WEST);
+          return this.calculateConnectFive(row + 1, column, count + 1, color, WinningLine.EAST) ||
+            this.calculateConnectFive(row - 1, column, count + 1, color, WinningLine.WEST) ||
+            this.calculateConnectFive(row, column + 1, count + 1, color, WinningLine.NORTH) ||
+            this.calculateConnectFive(row, column - 1, count + 1, color, WinningLine.SOUTH) ||
+            this.calculateConnectFive(row + 1, column + 1, count + 1, color, WinningLine.NORTHEAST) ||
+            this.calculateConnectFive(row - 1, column + 1, count + 1, color, WinningLine.NORTHWEST) ||
+            this.calculateConnectFive(row + 1, column - 1, count + 1, color, WinningLine.SOUTHEAST) ||
+            this.calculateConnectFive(row - 1, column - 1, count + 1, color, WinningLine.SOUTHWEST);
         default:
           return false;
       }
     }
   }
 
+/*
+  * Delays next player's turn by 100 milliseconds
+  *
+  */
   private delay(ms: number): Promise<any> {
-    return new Promise(resolve => setTimeout(() => this.isClickable = true, ms));
+    return new Promise(() => setTimeout(() => this.isClickable = true, ms));
   }
 
-  createGrid() {
+/*
+  * Display token
+  *
+  */
+  displayToken() {
     this.count = 1;
     this.isClickable = true;
+    this.nextColour = TokenColours.PLAYER1;
+  }
+
+/*
+  * Display game grid
+  *
+  */
+  displayGrid() {
     this.gridTiles = [];
     this.gridTileItems = [];
-    this.nextColour = TokenColours.PLAYER1;
 
     for (let i = 0; i < BoardSize.ROW; i++) {
       this.gridTileItems[i] = [];
@@ -170,7 +202,7 @@ export class GridComponent implements OnInit {
       this.token[i] = [];
       for (let j = 0; j < BoardSize.ROW; j++) {
         this.token[i][j] = new Token(0, 0);
-        this.gridTiles.push(i + '/' + j);
+        this.gridTiles.push(`${i} ${j}`);
       }
     }
   }

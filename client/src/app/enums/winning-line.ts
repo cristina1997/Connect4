@@ -2,5 +2,9 @@ export enum WinningLine {
   NORTH = 'N',
   SOUTH = 'S',
   EAST = 'E',
-  WEST = 'W'
+  WEST = 'W',
+  NORTHEAST = 'NE',
+  NORTHWEST = 'NW',
+  SOUTHEAST = 'SE',
+  SOUTHWEST = 'SW'
 }

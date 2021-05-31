@@ -4,19 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'menu',
+    redirectTo: 'game',
     pathMatch: 'full',
-  },
-  {
-    path: 'menu',
-    loadChildren: () =>
-      import('./components/menu/menu.module').then((module) => module.MenuModule),
   },
   {
     path: 'game',
     loadChildren: () =>
       import('./components/game/game.module').then((module) => module.GameModule),
   },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
