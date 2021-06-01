@@ -1,10 +1,6 @@
 # GenesysExercise
 
-5-in-a-Row, a variation of the famous Connect Four game, is a two-player connection game 
-in which the players first choose a color and then take turns dropping colored discs from the 
-top into a nine-column, six-row vertically suspended grid. The pieces fall straight down, 
-occupying the next available space within the column. The objective of the game is to be the 
-first to form a horizontal, vertical, or diagonal line of five of one's own discs
+5-in-a-Row, a variation of the famous Connect Four game
 
 ![Capture](https://user-images.githubusercontent.com/22792015/120250233-4a649500-c275-11eb-9501-aa6a2ac1ead9.JPG)
 
