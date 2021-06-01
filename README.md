@@ -1,5 +1,14 @@
 # GenesysExercise
 
+5-in-a-Row, a variation of the famous Connect Four game, is a two-player connection game 
+in which the players first choose a color and then take turns dropping colored discs from the 
+top into a nine-column, six-row vertically suspended grid. The pieces fall straight down, 
+occupying the next available space within the column. The objective of the game is to be the 
+first to form a horizontal, vertical, or diagonal line of five of one's own discs
+
+![Capture](https://user-images.githubusercontent.com/22792015/120250233-4a649500-c275-11eb-9501-aa6a2ac1ead9.JPG)
+
+
 ## JAVA
 
 You will need a text editor (Eclipse), [JDK 8 or later](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) (make sure the Java [PATH and JAVA_HOME](https://mkyong.com/java/how-to-set-java_home-on-windows-10/) are set up in the environment variables.
@@ -34,5 +43,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-![Capture](https://user-images.githubusercontent.com/22792015/120250233-4a649500-c275-11eb-9501-aa6a2ac1ead9.JPG)
